@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 
-const serviceAccount = require("./volunteer-service-7e2cc-firebase-adminsdk-lnkv9-2cd8f57c94.json");
+const serviceAccount = require("./genarateKey/volunteer-service-7e2cc-firebase-adminsdk-lnkv9-2cd8f57c94.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -107,8 +107,9 @@ client.connect(err => {
       })
   })
   app.post('/addOptions', (req, res)=>{
-      const options = req.body;
-      optionsCollection.insertMany(options)
+      const options = req.body
+    
+      optionsCollection.insertOne(options)
       .then(result=>{
           res.send(result.insertedCount > 0)
         
